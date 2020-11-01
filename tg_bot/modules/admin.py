@@ -118,6 +118,7 @@ def demote(bot: Bot, update: Update, args: List[str]) -> str:
 
 @run_async
 @bot_admin
+<<<<<<< HEAD
 @can_pin
 @user_admin
 @loggable
@@ -172,13 +173,19 @@ def unpin(bot: Bot, update: Update) -> str:
 
 @run_async
 @bot_admin
+=======
+>>>>>>> cf02007... split, try mimicking MR_B
 @user_admin
 def invite(bot: Bot, update: Update):
     chat = update.effective_chat  # type: Optional[Chat]
     message = update.effective_message #type: Optional[Messages]
     
     if chat.username:
+<<<<<<< HEAD
         update.effective_message.reply_text("@{}".format(chat.username))
+=======
+        update.effective_message.reply_text("@" + chat.username)
+>>>>>>> cf02007... split, try mimicking MR_B
     elif chat.type == chat.SUPERGROUP or chat.type == chat.CHANNEL:
         bot_member = chat.get_member(bot.id)
         if bot_member.can_invite_users:
@@ -265,11 +272,15 @@ done easily using the bot.
  - #link: same as /link
 
 *Admin only:*
+<<<<<<< HEAD
  - /pin: silently pins the message replied to - add 'loud' or 'notify' to give notifies to users.
  - /unpin: unpins the currently pinned message.
  - /invitelink: generates new invite link.
  - /setlink <your group link here>: set the group link for this chat.
  - /clearlink: clear the group link for this chat.
+=======
+ - /invitelink: gets invitelink
+>>>>>>> cf02007... split, try mimicking MR_B
  - /promote: promotes the user replied to
  - /demote: demotes the user replied to
  
@@ -282,19 +293,20 @@ An example of promoting someone to admins:
 
 __mod_name__ = "Admin"
 
+<<<<<<< HEAD
 PIN_HANDLER = CommandHandler("pin", pin, pass_args=True, filters=Filters.group)
 UNPIN_HANDLER = CommandHandler("unpin", unpin, filters=Filters.group)
 LINK_HANDLER = DisableAbleCommandHandler("link", link_public)
 SET_LINK_HANDLER = CommandHandler("setlink", set_link, filters=Filters.group)
 RESET_LINK_HANDLER = CommandHandler("clearlink", clear_link, filters=Filters.group)
 HASH_LINK_HANDLER = RegexHandler("#link", link_public)
+=======
+>>>>>>> cf02007... split, try mimicking MR_B
 INVITE_HANDLER = CommandHandler("invitelink", invite, filters=Filters.group)
 PROMOTE_HANDLER = CommandHandler("promote", promote, pass_args=True, filters=Filters.group)
 DEMOTE_HANDLER = CommandHandler("demote", demote, pass_args=True, filters=Filters.group)
 ADMINLIST_HANDLER = DisableAbleCommandHandler(["adminlist", "staff"], adminlist, filters=Filters.group)
 
-dispatcher.add_handler(PIN_HANDLER)
-dispatcher.add_handler(UNPIN_HANDLER)
 dispatcher.add_handler(INVITE_HANDLER)
 dispatcher.add_handler(LINK_HANDLER)
 dispatcher.add_handler(SET_LINK_HANDLER)
